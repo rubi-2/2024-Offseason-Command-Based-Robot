@@ -8,7 +8,11 @@ public final class RunShooterAutomode {
 
   /** static factory for the autonomous command. */
   public static Command shooterAuto(ShooterWheel subsystem) {
-    return Commands.sequence(new ShootCommand(subsystem, 20));
+    return Commands.sequence(
+      new ShootCommand(subsystem, 20).withTimeout(5),
+      Commands.waitSeconds(5),
+      new ShootCommand(subsystem, 20).withTimeout(5)
+      );
 
   }
 
